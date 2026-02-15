@@ -1,0 +1,96 @@
+<div class="app-layout" [class.collapsed]="isCollapsed">
+  <aside class="sidebar shadow">
+    <div class="sidebar-header">
+      <div class="logo-box">
+        <i class="fa-solid fa-leaf text-success"></i>
+      </div>
+      <span class="brand-name">Green Sync <small>v1.0</small></span>
+    </div>
+
+    <nav class="nav-container">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>แดชบอร์ดสรุปผล</span>
+      </a>
+
+      <div class="nav-label text-uppercase">บันทึกก๊าซเรือนกระจก</div>
+      <a routerLink="/carbon/logs" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-pen-to-square"></i>
+        <span>บันทึกการใช้พลังงาน</span>
+      </a>
+
+
+      <a routerLink="/ai-scan" routerLinkActive="active" class="nav-item ai-feature">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <span>AI สแกนบิลอัตโนมัติ</span>
+      </a>
+
+      <div class="nav-label text-uppercase">ประเมินสำนักงานสีเขียว</div>
+      <a routerLink="/green-office/form" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-clipboard-list"></i>
+        <span>แบบประเมินตนเอง</span>
+      </a>
+      <a routerLink="/green-office/evidence" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-file-arrow-up"></i>
+        <span>จัดการไฟล์หลักฐาน</span>
+      </a>
+
+      <div class="nav-label text-uppercase">จัดการองค์กร</div>
+      <a routerLink="/org/profile" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-building"></i>
+        <span>ข้อมูลหน่วยงาน</span>
+      </a>
+      <a routerLink="/subscription" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-box-archive"></i>
+        <span>แพ็กเกจการใช้งาน</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="user-avatar bg-success-subtle text-success">
+          {{ user?.username?.charAt(0) | uppercase }}
+        </div>
+        <div class="user-detail">
+          <p class="u-name">{{ user?.username }}</p>
+          <p class="u-org">{{ user?.organizationName }}</p>
+        </div>
+        <button class="btn-icon text-danger" (click)="authService.logout()">
+          <i class="fa-solid fa-power-off"></i>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-wrapper">
+    <header class="top-navbar bg-white border-bottom px-4 d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center">
+        <button class="btn-toggle me-3" (click)="toggleSidebar()">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+        <nav aria-label="breadcrumb" class="d-none d-md-block">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-muted">Applicant Portal</a></li>
+            <li class="breadcrumb-item active" aria-current="page">บันทึกข้อมูล</li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="top-actions d-flex align-items-center gap-3">
+        <div class="quota-info d-none d-lg-block">
+          <span class="badge rounded-pill bg-light text-dark border">
+             AI Usage: 12/50
+          </span>
+        </div>
+        <button class="btn-icon position-relative">
+          <i class="fa-solid fa-bell"></i>
+          <span class="notification-dot"></span>
+        </button>
+      </div>
+    </header>
+
+    <section class="content-view p-4">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>

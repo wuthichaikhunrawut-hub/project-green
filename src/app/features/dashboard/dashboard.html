@@ -1,0 +1,156 @@
+<div class="container-fluid p-4">
+  
+  <div class="d-flex justify-content-between align-items-center mb-4 fade-in">
+    <div>
+      <h2 class="fw-bold text-dark mb-0">Dashboard ภาพรวม</h2>
+      <p class="text-muted small mt-1">
+        ข้อมูล ณ วันที่ {{ currentDate | thaiDate }}
+      </p>
+    </div>
+    <div>
+      <button class="btn btn-primary shadow-sm">
+        <i class="fa-solid fa-download me-2"></i> ดาวน์โหลดรายงาน
+      </button>
+    </div>
+  </div>
+
+  <div class="row g-4 mb-4 fade-in-up">
+    
+    <div class="col-12 col-md-6 col-xl-3">
+      <div class="card stat-card border-0 h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-3">
+            <div>
+              <span class="d-block text-muted small text-uppercase fw-bold">คาร์บอนฟุตพริ้นท์</span>
+              <h3 class="mb-0 fw-bold text-dark mt-2">{{ carbonTotal | number:'1.2-2' }}</h3>
+            </div>
+            <div class="icon-box bg-soft-danger text-danger">
+              <i class="fa-solid fa-smog fa-lg"></i>
+            </div>
+          </div>
+          <span class="badge bg-success-subtle text-success rounded-pill px-2">
+            <i class="fa-solid fa-arrow-down small"></i> 5.2%
+          </span>
+          <span class="text-muted small ms-2">จากเดือนที่แล้ว</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-3">
+      <div class="card stat-card border-0 h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-3">
+            <div>
+              <span class="d-block text-muted small text-uppercase fw-bold">การใช้ไฟฟ้าสะสม</span>
+              <h3 class="mb-0 fw-bold text-dark mt-2">{{ energyUsage | number }} <small class="text-muted fs-6">kWh</small></h3>
+            </div>
+            <div class="icon-box bg-soft-warning text-warning">
+              <i class="fa-solid fa-bolt fa-lg"></i>
+            </div>
+          </div>
+          <span class="badge bg-danger-subtle text-danger rounded-pill px-2">
+            <i class="fa-solid fa-arrow-up small"></i> 2.1%
+          </span>
+          <span class="text-muted small ms-2">จากเป้าหมาย</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-3">
+      <div class="card stat-card border-0 h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-3">
+            <div>
+              <span class="d-block text-muted small text-uppercase fw-bold">คะแนนสำนักงานสีเขียว</span>
+              <h3 class="mb-0 fw-bold text-dark mt-2">{{ greenScore }}%</h3>
+            </div>
+            <div class="icon-box bg-soft-success text-success">
+              <i class="fa-solid fa-leaf fa-lg"></i>
+            </div>
+          </div>
+          <div class="progress" style="height: 6px;">
+            <div class="progress-bar bg-success" role="progressbar" [style.width.%]="greenScore"></div>
+          </div>
+          <small class="text-muted mt-2 d-block">ระดับ: <span class="text-success fw-bold">ทอง (Gold)</span></small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-3">
+      <div class="card stat-card border-0 h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-3">
+            <div>
+              <span class="d-block text-muted small text-uppercase fw-bold">พนักงานที่เข้าร่วม</span>
+              <h3 class="mb-0 fw-bold text-dark mt-2">124 <small class="text-muted fs-6">คน</small></h3>
+            </div>
+            <div class="icon-box bg-soft-primary text-primary">
+              <i class="fa-solid fa-users fa-lg"></i>
+            </div>
+          </div>
+          <div class="avatars">
+            <span class="avatar bg-secondary text-white small">+12</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    
+    <div class="col-12 col-lg-8">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-header bg-white border-0 py-3">
+          <h5 class="fw-bold mb-0">📉 แนวโน้มการปล่อยก๊าซเรือนกระจก</h5>
+        </div>
+        <div class="card-body d-flex align-items-end justify-content-around px-5 pb-0" style="height: 300px; background: #f8fafc;">
+          <div class="bar-group text-center">
+            <div class="bar bg-secondary opacity-25" style="height: 120px; width: 40px; border-radius: 4px 4px 0 0;"></div>
+            <small class="d-block mt-2">ต.ค.</small>
+          </div>
+          <div class="bar-group text-center">
+            <div class="bar bg-secondary opacity-25" style="height: 140px; width: 40px; border-radius: 4px 4px 0 0;"></div>
+            <small class="d-block mt-2">พ.ย.</small>
+          </div>
+          <div class="bar-group text-center">
+            <div class="bar bg-secondary opacity-25" style="height: 100px; width: 40px; border-radius: 4px 4px 0 0;"></div>
+            <small class="d-block mt-2">ธ.ค.</small>
+          </div>
+          <div class="bar-group text-center">
+            <div class="bar bg-success" style="height: 80px; width: 40px; border-radius: 4px 4px 0 0;"></div>
+            <small class="d-block mt-2 fw-bold text-success">ม.ค.</small>
+          </div>
+          <div class="bar-group text-center">
+            <div class="bar bg-success opacity-75" style="height: 70px; width: 40px; border-radius: 4px 4px 0 0;"></div>
+            <small class="d-block mt-2 text-muted">ก.พ.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-header bg-white border-0 py-3">
+          <h5 class="fw-bold mb-0">🔔 กิจกรรมล่าสุด</h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="list-group list-group-flush">
+            <div *ngFor="let activity of recentActivities" class="list-group-item px-4 py-3 border-light">
+              <div class="d-flex align-items-center">
+                <div class="dot me-3" [ngClass]="'bg-' + activity.type"></div>
+                <div>
+                  <p class="mb-0 text-dark small fw-bold">{{ activity.text }}</p>
+                  <small class="text-muted" style="font-size: 0.75rem;">{{ activity.time }}</small>
+                </div>
+              </div>
+            </div>
+            <div class="p-3 text-center">
+               <button class="btn btn-link text-decoration-none small">ดูประวัติทั้งหมด</button>
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

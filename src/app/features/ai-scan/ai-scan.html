@@ -1,0 +1,77 @@
+<div class="container-fluid p-4 animate-in">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card border-0 shadow-sm rounded-4 h-100">
+        <div class="card-body p-4 text-center">
+          <h5 class="fw-bold mb-4 text-start">1. อัปโหลดบิลค่าพลังงาน</h5>
+          
+          <div class="upload-zone" [class.has-file]="previewUrl" (click)="fileInput.click()">
+            <input type="file" #fileInput hidden (change)="onFileChange($event)" accept="image/*,application/pdf">
+            
+            <div *ngIf="!previewUrl" class="py-5">
+              <i class="fa-solid fa-cloud-arrow-up display-1 text-success mb-3 opacity-25"></i>
+              <h5>ลากไฟล์มาวาง หรือคลิกเพื่อเลือกไฟล์</h5>
+              <p class="text-muted small">รองรับไฟล์ JPG, PNG, PDF (สูงสุด 5MB)</p>
+            </div>
+
+            <img *ngIf="previewUrl" [src]="previewUrl" class="img-fluid rounded-3 shadow-sm preview-img">
+          </div>
+
+          <button *ngIf="previewUrl && !scanResult" (click)="processAi()" [disabled]="isProcessing" class="btn btn-success w-100 py-3 mt-4 fw-bold">
+            <span *ngIf="isProcessing" class="spinner-border spinner-border-sm me-2"></span>
+            {{ isProcessing ? 'AI กำลังอ่านข้อมูล...' : 'เริ่มการสแกนด้วย AI' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card border-0 shadow-sm rounded-4 h-100 bg-white">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-4">2. ผลลัพธ์การวิเคราะห์</h5>
+          
+          <div *ngIf="!scanResult && !isProcessing" class="empty-state text-center py-5">
+            <i class="fa-solid fa-robot display-4 text-light mb-3"></i>
+            <p class="text-muted">กรุณาอัปโหลดบิลเพื่อให้ AI เริ่มทำงาน</p>
+          </div>
+
+          <div *ngIf="isProcessing" class="scanning-animation py-5 text-center">
+             <div class="ai-line-scanner"></div>
+             <p class="mt-4 text-success fw-bold">กำลังตรวจสอบความถูกต้องของข้อมูล...</p>
+          </div>
+
+          <div *ngIf="scanResult" class="result-details animate-up">
+            <div class="alert alert-success d-flex align-items-center mb-4">
+              <i class="fa-solid fa-circle-check me-2"></i>
+              <span>AI อ่านข้อมูลสำเร็จ (ความมั่นใจ {{scanResult.confidence}}%)</span>
+            </div>
+
+            <div class="mb-3">
+              <label class="small text-muted">ประเภทกิจกรรม</label>
+              <div class="h5 fw-bold">{{scanResult.type}}</div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-6">
+                <label class="small text-muted">ปริมาณการใช้</label>
+                <div class="h5 fw-bold text-success">{{scanResult.amount | number}} {{scanResult.unit}}</div>
+              </div>
+              <div class="col-6">
+                <label class="small text-muted">ประจำเดือน</label>
+                <div class="h5 fw-bold">{{scanResult.date}}</div>
+              </div>
+            </div>
+
+            <hr>
+            <p class="small text-muted mb-4"><i class="fa-solid fa-circle-info me-1"></i> กรุณาตรวจสอบความถูกต้องก่อนกดบันทึก</p>
+
+            <div class="d-flex gap-2">
+              <button (click)="reset()" class="btn btn-light flex-grow-1 py-2 fw-bold">ยกเลิก</button>
+              <button (click)="confirmSave()" class="btn btn-success flex-grow-1 py-2 fw-bold">ยืนยันบันทึกข้อมูล</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
